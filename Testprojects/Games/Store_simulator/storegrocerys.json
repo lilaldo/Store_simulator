@@ -40,5 +40,6 @@
   {"Item": "Milk", "Price": 1.0},
   {"Item": "Candy", "Price": 2.0},
   {"Item": "Cheese", "Price": 5.0},
-  {"Item": "Juice", "Price": 2.0}
+  {"Item": "Juice", "Price": 2.0},
+  {"Item": "Butter", "Price": 4.0}
 ]
