@@ -26,8 +26,9 @@ class Cashier:
         print(f"Oh, {self.name} is working in the register!")
 
     def scanning(self, num_items):
+        print(f"{self.name} is scanning. . .")
         for items in shopping.shopping_cart:
-            print(f"{self.name} is scanning {items['Item']}...")
+            print(f"{items['Item']}...")
             time.sleep(num_items / self.scanning_speed)
 
 
@@ -74,10 +75,10 @@ class Shopping:
 
 
 cashiers = [
-    Cashier("Jessica", 2.0),
-    Cashier("Pedro", 3.0),
-    Cashier("Brian", 0.6),
-    Cashier("André", 1.0)
+    Cashier("Jessica", 4.0),
+    Cashier("Pedro", 6.0),
+    Cashier("Brian", 1.6),
+    Cashier("André", 3.0)
 ]
 
 shopping = Shopping()
@@ -100,4 +101,5 @@ total_price = shopping.calculate_total_price()
 print(f"Total price for your shopping cart: ${total_price:.2f}")
 cash_card = input("Would you like to pay with cash or card? ")
 #if cash_card == 'Cash'.lower():
+
 
