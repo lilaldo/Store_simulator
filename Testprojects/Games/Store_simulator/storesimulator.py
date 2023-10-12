@@ -4,7 +4,10 @@ import time
 
 with open('storegroceries.json', 'r') as file:
     groceries_data = json.load(file)
-class Person:
+
+
+# Costumer attributes
+class Me:
     pass
 
 
@@ -12,20 +15,20 @@ class Person:
 class Store:
     pass
 
+
 # Cashier stuff
 class Cashier:
     def __init__(self, name, scanning_speed):
         self.name = name
         self.scanning_speed = scanning_speed
-    def cashier_attributes(self):
+
+    def cashier(self):
         print(f"Oh, {self.name} is working in the register!")
 
     def scanning(self, num_items):
         for items in shopping.shopping_cart:
-            print(f"{self.name} is scanning {items}...")
+            print(f"{self.name} is scanning {items['Item']}...")
             time.sleep(num_items / self.scanning_speed)
-
-
 
 
 class Shopping:
@@ -67,15 +70,17 @@ class Shopping:
             print("Still standing in line... *Checking phone*")
             time.sleep(line / 2)
             print("Oh its my turn! ")
+            return
 
+
+cashiers = [
+    Cashier("Jessica", 2.0),
+    Cashier("Pedro", 3.0),
+    Cashier("Brian", 0.6),
+    Cashier("André", 1.0)
+]
 
 shopping = Shopping()
-
-cashier1 = Cashier("Jessica", 2.0)  # Jessica skannar 2 varor per sekund
-cashier2 = Cashier("Thomas", 1.5)  # Thomas skannar 1.5 varor per sekund
-cashier3 = Cashier("Brian", 1.0)   # Brian skannar 1 vara per sekund
-
-cashier =
 
 
 while True:
@@ -83,11 +88,16 @@ while True:
     if shopper == 'cart':
         shopping.check_cart()
     elif shopper == 'done':
-        # kod här
+        standing_cashier = random.choice(cashiers)
         shopping.checkout()
+        standing_cashier.cashier()
+        standing_cashier.scanning(len(shopping.shopping_cart))
         break
     else:
         shopping.picking_groceries(shopper)
 
 total_price = shopping.calculate_total_price()
 print(f"Total price for your shopping cart: ${total_price:.2f}")
+cash_card = input("Would you like to pay with cash or card? ")
+#if cash_card == 'Cash'.lower():
+
