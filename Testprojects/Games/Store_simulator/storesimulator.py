@@ -7,9 +7,9 @@ with open('storegroceries.json', 'r') as file:
 
 
 # Costumer attributes
+# cash or card?
 class Me:
     pass
-
 
 
 class Store:
@@ -35,6 +35,7 @@ class Cashier:
 class Shopping:
     def __init__(self):
         self.shopping_cart = []  # Empty list which simulates the shopping cart.
+        self.total_price = 0
 
     def picking_groceries(self, item_name):
         if item_name in ['check', 'cart']:  # Makes the program not to continue the function if checking the cart.
@@ -67,11 +68,22 @@ class Shopping:
             print(f"Oh theres {line} costumer before me...")
         else:
             print(f"Oh theres {line} costumer before me...")
-            time.sleep(line / 2)
+            # time.sleep(line / 2)
             print("Still standing in line... *Checking phone*")
-            time.sleep(line / 2)
+            # time.sleep(line / 2)
             print("Oh its my turn! ")
             return
+
+    def bags(self):
+        bag_ask = input("Do you need any bags?")
+        if bag_ask == 'yes':
+            bag_count = int(input('How many?'))
+            bag_price = 2
+            total_bag_price = bag_count * bag_price
+            self.total_price += total_bag_price
+            return total_bag_price
+        else:
+            return 0
 
 
 cashiers = [
@@ -79,15 +91,30 @@ cashiers = [
     Cashier("Pedro", 6.0),
     Cashier("Brian", 1.6),
     Cashier("André", 3.0)
-]
+    ]
 
 shopping = Shopping()
 
+
+def welcome():
+    print("Welcome to Store-simulator! ")
+    weight_carry = input("Would you like a cart or carry? ")
+    if weight_carry == 'carry':
+        max_weight = 13
+    elif weight_carry == 'cart':
+        max_weight = 30
+    else:
+        max_weight = 6
+    return max_weight
+
+
+max_weight = welcome()
 
 while True:
     shopper = input("What would you like to add to the shopping cart (or 'done' to finish)? ".lower())
     if shopper == 'cart':
         shopping.check_cart()
+        print(f"You can carry {max_weight - len(shopping.shopping_cart)} more items")
     elif shopper == 'done':
         standing_cashier = random.choice(cashiers)
         shopping.checkout()
@@ -99,7 +126,6 @@ while True:
 
 total_price = shopping.calculate_total_price()
 print(f"Total price for your shopping cart: ${total_price:.2f}")
-cash_card = input("Would you like to pay with cash or card? ")
-#if cash_card == 'Cash'.lower():
-
+shopping.bags()
+print(f"New total price is ${total_price}")
 
